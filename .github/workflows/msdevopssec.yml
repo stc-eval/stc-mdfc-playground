@@ -43,3 +43,10 @@ jobs:
       with:  
         name: alerts
         path: ${{ steps.msdo.outputs.sarifFile }}
+        
+      # Run analyzers
+    - name: Run Microsoft Security DevOps Analysis
+      uses: microsoft/security-devops-action@latest
+      id: msdo
+      with:
+        include-tools: container-mapping
