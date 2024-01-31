@@ -25,6 +25,13 @@ jobs:
       # Checkout your code repository to scan
     - uses: actions/checkout@v3
 
+      # create Cloud Formation Template
+    - name: cdk synth
+      uses: youyo/aws-cdk-github-actions@v2
+      with:
+        cdk_subcommand: 'synth'
+        working_dir: './aws-cdk-test'
+
       # Run analyzers
     - name: Run Microsoft Security DevOps Analysis
       uses: microsoft/security-devops-action@latest
