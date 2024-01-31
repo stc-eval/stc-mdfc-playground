@@ -23,6 +23,7 @@ class AwsCdkTestStack(Stack):
                 ignore_public_acls=False,
                 restrict_public_buckets=False,
             ),
+            versioned=True,
         )
 
         vpc = ec2.Vpc(
