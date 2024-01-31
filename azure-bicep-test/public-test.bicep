@@ -10,6 +10,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   }
   kind: 'StorageV2'
   properties: {
+    networkAcls: {
+      defaultAction: 'Deny'
+    }
     accessTier: 'Hot'
     allowBlobPublicAccess: true
   }
