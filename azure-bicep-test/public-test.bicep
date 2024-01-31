@@ -15,6 +15,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     }
     accessTier: 'Hot'
     allowBlobPublicAccess: true
+    encryption: {
+      requireInfrastructureEncryption: false
+    }
   }
 
   resource blobService 'blobServices' existing = {
