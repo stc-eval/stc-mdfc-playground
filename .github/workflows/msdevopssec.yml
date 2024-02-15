@@ -39,7 +39,7 @@ jobs:
       uses: microsoft/security-devops-action@latest
       id: msdo
       with:
-        include-tools: container-mapping
+        includeTools: container-mapping
         categories: 'IaC,code'
         tools: 'templateanalyzer,terrascan,bandit'
       # config: string. Optional. A file path to an MSDO configuration file ('*.gdnconfig').
