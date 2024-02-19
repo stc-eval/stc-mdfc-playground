@@ -34,14 +34,22 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # build Docker file
+    - name: Build an apache image from Dockerfile
+      run: |
+        docker build -t apache-image:${{ github.sha }} ./docker-test/apache/
+
       # Run analyzers
     - name: Run Microsoft Security DevOps Analysis
       uses: microsoft/security-devops-action@latest
       id: msdo
+      env:
+        GDN_TRIVY_ACTION: image
+        GDN_TRIVY_TARGET: apache-image:${{ github.sha }}
       with:
         includeTools: container-mapping
         categories: 'IaC,code,containers'
-        tools: 'templateanalyzer,terrascan,bandit'
+        tools: 'templateanalyzer,terrascan,bandit,trivy'
       # config: string. Optional. A file path to an MSDO configuration file ('*.gdnconfig').
       # policy: 'GitHub' | 'microsoft' | 'none'. Optional. The name of a well-known Microsoft policy. If no configuration file or list of tools is provided, the policy may instruct MSDO which tools to run. Default: GitHub.
       # categories: string. Optional. A comma-separated list of analyzer categories to run. Values: 'secrets', 'code', 'artifacts', 'IaC', 'containers. Example: 'IaC,secrets'. Defaults to all.
