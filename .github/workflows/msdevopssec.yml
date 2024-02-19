@@ -34,13 +34,18 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # build Docker file
+    - name: Build an apache image from Dockerfile
+        run: |
+          docker build -t apache-image:${{ github.sha }} ./docker-test/apache/Dockerfile
+
       # Run analyzers
     - name: Run Microsoft Security DevOps Analysis
       uses: microsoft/security-devops-action@latest
       id: msdo
       env:
         GDN_TRIVY_ACTION: image
-        # GDN_TRIVY_TARGET: 
+        GDN_TRIVY_TARGET: apache-image:${{ github.sha }}
       with:
         includeTools: container-mapping
         categories: 'IaC,code,containers'
