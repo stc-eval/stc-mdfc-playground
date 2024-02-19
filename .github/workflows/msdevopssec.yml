@@ -37,7 +37,7 @@ jobs:
       # build Docker file
     - name: Build an apache image from Dockerfile
       run: |
-        docker build -t apache-image:${{ github.sha }} ./docker-test/apache/Dockerfile
+        docker build -t apache-image:${{ github.sha }} ./docker-test/apache/
 
       # Run analyzers
     - name: Run Microsoft Security DevOps Analysis
