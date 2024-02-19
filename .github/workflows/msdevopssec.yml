@@ -39,7 +39,8 @@ jobs:
       uses: microsoft/security-devops-action@latest
       id: msdo
       env:
-        GDN_TRIVY_ACTION: config
+        GDN_TRIVY_ACTION: image
+        # GDN_TRIVY_TARGET: 
       with:
         includeTools: container-mapping
         categories: 'IaC,code,containers'
